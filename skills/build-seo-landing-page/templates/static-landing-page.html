@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="{{HTML_LANG}}">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Insert adapted metadata-head.html here. -->
+  </head>
+  <body>
+    <a href="#main" class="skip-link">Skip to main content</a>
+
+    <header>
+      <nav aria-label="Main navigation">
+        <a href="#top" aria-label="{{SITE_NAME}} home">{{SITE_NAME}}</a>
+        <a href="#services">Services</a>
+        <a href="#location">Location</a>
+        <a href="#faq">FAQ</a>
+        <a href="{{PRIMARY_CTA_URL}}">{{PRIMARY_CTA_LABEL}}</a>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section id="top" aria-labelledby="hero-title">
+        <p>{{HERO_EYEBROW}}</p>
+        <h1 id="hero-title">{{HERO_TITLE}}</h1>
+        <p>{{HERO_COPY}}</p>
+        <a href="{{PRIMARY_CTA_URL}}">{{PRIMARY_CTA_LABEL}}</a>
+      </section>
+
+      <section id="services" aria-labelledby="services-title">
+        <h2 id="services-title">{{SERVICES_TITLE}}</h2>
+        <article>
+          <h3>{{SERVICE_NAME_1}}</h3>
+          <p>{{SERVICE_DESCRIPTION_1}}</p>
+        </article>
+        <article>
+          <h3>{{SERVICE_NAME_2}}</h3>
+          <p>{{SERVICE_DESCRIPTION_2}}</p>
+        </article>
+      </section>
+
+      <section id="location" aria-labelledby="location-title">
+        <h2 id="location-title">{{LOCATION_TITLE}}</h2>
+        <address>{{ADDRESS}}</address>
+        <a href="{{MAP_URL}}">Open map</a>
+      </section>
+
+      <section id="faq" aria-labelledby="faq-title">
+        <h2 id="faq-title">{{FAQ_TITLE}}</h2>
+        <details>
+          <summary>{{QUESTION_1}}</summary>
+          <p>{{ANSWER_1}}</p>
+        </details>
+        <details>
+          <summary>{{QUESTION_2}}</summary>
+          <p>{{ANSWER_2}}</p>
+        </details>
+      </section>
+    </main>
+
+    <footer>
+      <strong>{{BUSINESS_OR_SITE_NAME}}</strong>
+      <p>{{FOOTER_SUMMARY}}</p>
+    </footer>
+  </body>
+</html>

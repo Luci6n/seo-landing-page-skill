@@ -1,0 +1,4 @@
+interface:
+  display_name: "Building SEO Landing Pages"
+  short_description: "Build and audit SEO landing pages"
+  default_prompt: "Use $building-seo-landing-pages to build or audit a landing page with SEO, AEO/GEO, performance, accessibility, deployment, and validation best practices."

@@ -1,0 +1,14 @@
+# Skill source notes and non-runtime docs.
+skill-dev-notes/
+
+# Generated validation reports.
+reports/
+
+# Dependency and build output folders.
+node_modules/
+dist/
+build/
+
+# OS/editor noise.
+.DS_Store
+Thumbs.db

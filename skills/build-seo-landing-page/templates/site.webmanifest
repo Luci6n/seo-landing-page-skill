@@ -1,0 +1,21 @@
+{
+  "name": "{{SITE_NAME}}",
+  "short_name": "{{SHORT_SITE_NAME}}",
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "sizes": "96x96",
+      "type": "image/png"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "{{START_URL}}",
+  "scope": "{{SCOPE_URL}}",
+  "theme_color": "{{THEME_COLOR}}",
+  "background_color": "{{BACKGROUND_COLOR}}",
+  "display": "standalone"
+}

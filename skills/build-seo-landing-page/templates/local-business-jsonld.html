@@ -1,0 +1,77 @@
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": ["LocalBusiness", "{{SPECIFIC_BUSINESS_TYPE}}"],
+  "@id": "{{CANONICAL_URL}}#business",
+  "name": "{{BUSINESS_NAME}}",
+  "url": "{{CANONICAL_URL}}",
+  "logo": "{{LOGO_URL}}",
+  "image": "{{IMAGE_URL}}",
+  "alternateName": [
+    "{{ALTERNATE_NAME_1}}",
+    "{{ALTERNATE_NAME_2}}"
+  ],
+  "description": "{{BUSINESS_DESCRIPTION}}",
+  "telephone": "{{PHONE}}",
+  "priceRange": "{{PRICE_RANGE}}",
+  "inLanguage": ["{{LANGUAGE_1}}", "{{LANGUAGE_2}}"],
+  "sameAs": [
+    "{{OFFICIAL_PROFILE_URL_1}}",
+    "{{OFFICIAL_PROFILE_URL_2}}"
+  ],
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "{{STREET_ADDRESS}}",
+    "postalCode": "{{POSTAL_CODE}}",
+    "addressLocality": "{{CITY}}",
+    "addressRegion": "{{REGION}}",
+    "addressCountry": "{{COUNTRY_CODE}}"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": {{LATITUDE}},
+    "longitude": {{LONGITUDE}}
+  },
+  "areaServed": [
+    { "@type": "Place", "name": "{{SERVICE_AREA_1}}" },
+    { "@type": "Place", "name": "{{SERVICE_AREA_2}}" }
+  ],
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["{{DAY_1}}", "{{DAY_2}}"],
+      "opens": "{{OPEN_TIME}}",
+      "closes": "{{CLOSE_TIME}}"
+    }
+  ],
+  "openingHours": ["{{OPENING_HOURS_SHORT}}"],
+  "hasMap": "{{GOOGLE_MAPS_URL}}",
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "{{PHONE}}",
+    "contactType": "customer service",
+    "availableLanguage": ["{{LANGUAGE_NAME_1}}", "{{LANGUAGE_NAME_2}}"],
+    "url": "{{CONTACT_URL}}"
+  },
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "{{OFFER_CATALOG_NAME}}",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "{{SERVICE_NAME_1}}"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "{{SERVICE_NAME_2}}"
+        }
+      }
+    ]
+  }
+}
+</script>
