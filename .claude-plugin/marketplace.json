@@ -4,7 +4,7 @@
     "name": "Luci6n"
   },
   "metadata": {
-    "description": "Build, improve, and audit SEO-ready landing pages with conversion UX, local SEO, AEO/GEO guidance, structured data, performance checks, accessibility, deployment, and Search Console workflows.",
+    "description": "Build, improve, and audit conversion-focused landing pages with responsive design, SEO/AEO/GEO, structured data, accessibility, performance, deployment, and launch validation.",
     "version": "0.1.0",
     "tags": [
         "landing-page",
@@ -19,7 +19,7 @@
   "plugins": [
     {
       "name": "build-seo-landing-page-skills",
-      "description": "Adds a landing-page skill with SEO/AEO/GEO checklists, local business guidance, structured-data templates, validation scripts, deployment notes, and launch guardrails.",
+      "description": "Adds a skill for building, improving, and auditing conversion-focused landing pages with SEO/AEO/GEO guidance, templates, validation scripts, deployment notes, and launch guardrails.",
       "source": "./",
       "strict": false,
       "skills": [

@@ -1,104 +1,131 @@
-# Building SEO Landing Pages Skill
+# Build SEO Landing Pages
 
-This repository contains a Codex skill for building, improving, auditing, deploying, and validating SEO-focused landing pages.
+Build, improve, and audit conversion-focused landing pages with responsive design, SEO/AEO/GEO, structured data, accessibility, performance, deployment, and launch validation.
 
-The skill helps agents work on static sites, service pages, local business pages, React/Next.js marketing pages, and other landing-page projects with attention to UX, conversion copy, local SEO, AEO/GEO readiness, structured data, performance, accessibility, deployment, Search Console, and post-launch checks.
+## Why This Skill Exists
 
-## Skill
+AI agents can build landing pages quickly, but they often miss the parts that matter in real launch work: clear first-view messaging, local business facts, metadata, structured data, site files, performance checks, Search Console steps, and honest post-launch validation.
 
-The installable skill lives in:
+This repo packages that workflow into one reusable skill so agents can create or improve landing pages with better judgment and fewer missed details.
 
-```text
-building-seo-landing-pages/
-```
+## What's Inside
 
-Its entry point is:
+This repository currently ships one installable skill:
 
-```text
-building-seo-landing-pages/SKILL.md
-```
+- `skills/build-seo-landing-page/`
 
-Codex uses the `name` and `description` in `SKILL.md` to decide when to load the skill. The current skill name is:
+The skill includes:
 
-```text
-building-seo-landing-pages
-```
+- `SKILL.md` for trigger metadata and core workflow
+- `agents/openai.yaml` for UI-facing skill metadata
+- `references/` for landing-page, SEO, local SEO, framework, deployment, and validation guidance
+- `templates/` for reusable metadata, sitemap, robots, manifest, and JSON-LD starting points
+- `scripts/` for repeatable validation and reporting tasks
 
-## What It Includes
+## Compatibility
 
-- `SKILL.md` - core trigger metadata and workflow instructions.
-- `agents/openai.yaml` - UI metadata for the skill.
-- `references/` - focused guides for landing-page workflow, framework implementation, content, SEO, local SEO, structured data, validation, deployment, domains, and Search Console.
-- `templates/` - reusable starting points for metadata, manifests, robots, sitemaps, JSON-LD, static landing pages, launch checklists, and privacy notices.
-- `scripts/` - optional validation helpers for metadata, links, structured data, site files, placeholders, Lighthouse, PageSpeed, and Search Console actions.
+This repo is designed to be useful across multiple coding agents and workflows:
 
-## Example Prompts
+- Codex-style skill installs
+- Claude Code plugin and skill workflows
+- Community `skills` CLI installs
+- Local/manual use as a reference or bundled skill folder
 
-```text
-Use $building-seo-landing-pages to audit this landing page for SEO, structured data, performance, and conversion issues.
-```
+The skill content is framework-friendly rather than framework-specific. It can guide work on:
 
-```text
-Use $building-seo-landing-pages to create a local service landing page for an air conditioning business in Kuala Lumpur.
-```
+- static HTML/CSS/JavaScript landing pages
+- React or Vite marketing pages
+- Next.js marketing sites
+- Astro and similar content-first frameworks
+- local business websites, service pages, portfolio pages, and SaaS/product landing pages
 
-```text
-Use $building-seo-landing-pages to review this Next.js page before launch and tell me what still needs fixing.
-```
+## Quick Install / Usage
 
-## Installation
+### Option A: `skills` CLI
 
-Copy or link the skill folder into your Codex skills directory:
-
-```powershell
-Copy-Item -Recurse .\building-seo-landing-pages "$env:USERPROFILE\.codex\skills\building-seo-landing-pages"
-```
-
-After installation, restart Codex or reload the agent environment so the skill metadata is discovered.
-
-## Useful Commands
-
-Run validation scripts from the target website project root.
+Install from a repo with the community `skills` CLI:
 
 ```bash
-node path/to/building-seo-landing-pages/scripts/check-metadata.mjs index.html
-node path/to/building-seo-landing-pages/scripts/check-structured-data.mjs index.html
-node path/to/building-seo-landing-pages/scripts/check-links.mjs index.html
-node path/to/building-seo-landing-pages/scripts/check-site-files.mjs public
-node path/to/building-seo-landing-pages/scripts/check-placeholders.mjs .
+npx skills add Luci6n/seo-landing-page-skill -s build-seo-landing-page
 ```
 
-For live performance checks:
+### Option B: Claude Code plugin marketplace
+
+Add the marketplace repo, then install the bundled plugin:
 
 ```bash
-node path/to/building-seo-landing-pages/scripts/run-lighthouse.mjs https://example.com/ mobile
-node path/to/building-seo-landing-pages/scripts/summarize-lighthouse.mjs reports/lighthouse-mobile.json
-node path/to/building-seo-landing-pages/scripts/run-pagespeed.mjs https://example.com/ mobile
-node path/to/building-seo-landing-pages/scripts/summarize-pagespeed.mjs reports/pagespeed-mobile.json
+/plugin marketplace add Luci6n/seo-landing-page-skill
+/plugin install build-seo-landing-page-skills@seo-landing-pages
 ```
 
-PageSpeed can use:
+### Option C: Manual install
 
-```text
-PAGESPEED_API_KEY
-```
-
-Search Console scripts require:
-
-```text
-GOOGLE_SEARCH_CONSOLE_ACCESS_TOKEN
-```
-
-## Development Notes
-
-Keep `SKILL.md` concise and put detailed guidance in `references/`. Add scripts only for repeatable checks that benefit from deterministic behavior. Keep templates generic and make sure agents are instructed to adapt them before inserting them into a real project.
-
-When updating the skill, validate the skill folder:
+Copy the skill folder into your agent's skills directory:
 
 ```powershell
-python C:\Users\User\.codex\skills\.system\skill-creator\scripts\quick_validate.py .\building-seo-landing-pages
+Copy-Item -Recurse .\skills\build-seo-landing-page "$env:USERPROFILE\.codex\skills\build-seo-landing-page"
 ```
 
-## Safety Rules
+You can also copy it into another tool's local skills directory if that tool supports `SKILL.md`-style skills.
 
-The skill should never fake ratings, reviews, rankings, indexing status, Lighthouse/PageSpeed scores, Core Web Vitals outcomes, deployment status, or Search Console results. If network access, credentials, dependencies, or quotas are unavailable, the agent should explain the blocker and provide the exact manual command or next step.
+### Example usage
+
+```text
+Use $build-seo-landing-page to audit this landing page for SEO, structured data, performance, and conversion issues.
+```
+
+```text
+Use $build-seo-landing-page to create a local service landing page for an air conditioning business in Kuala Lumpur.
+```
+
+```text
+Use $build-seo-landing-page to review this Next.js page before launch and tell me what still needs fixing.
+```
+
+Validation helpers are included under `skills/build-seo-landing-page/scripts/` for metadata, structured data, links, site files, placeholders, Lighthouse, PageSpeed, and Search Console workflows.
+
+Optional API-backed checks may use:
+
+- `PAGESPEED_API_KEY`
+- `GOOGLE_SEARCH_CONSOLE_ACCESS_TOKEN`
+
+If one of these is needed and missing, the agent should ask only when the requested action requires it and use the secret for the current session only by default.
+
+See `SKILL.md` and `CONTRIBUTING.md` for deeper usage and validation details.
+
+## Repo Structure
+
+```text
+.
+|-- .claude-plugin/
+|   |-- marketplace.json
+|   `-- plugin.json
+|-- skills/
+|   `-- build-seo-landing-page/
+|       |-- SKILL.md
+|       |-- agents/
+|       |   `-- openai.yaml
+|       |-- references/
+|       |-- scripts/
+|       `-- templates/
+|-- .gitignore
+|-- CONTRIBUTING.md
+|-- LICENSE
+`-- README.md
+```
+
+## Contributing
+
+See [CONTRIBUTING.md](./CONTRIBUTING.md) for the repo workflow, quality bar, and validation expectations.
+
+Good contributions here usually do one of these:
+
+- improve the skill trigger wording or workflow
+- add or tighten a reusable validation script
+- improve a reference doc without bloating `SKILL.md`
+- add a genuinely reusable template
+- fix incorrect or outdated SEO/AEO/GEO guidance
+
+## License
+
+This repository is licensed under the [MIT License](./LICENSE).
