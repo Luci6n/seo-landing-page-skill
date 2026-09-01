@@ -9,7 +9,8 @@
 - [ ] Twitter metadata is correct.
 - [ ] Favicon files exist.
 - [ ] Manifest exists.
-- [ ] Robots, sitemap, manifest, and common icon files checked.
+- [ ] Robots, sitemap, manifest, `llms.txt`, and common icon files checked.
+- [ ] AI-crawler access in `robots.txt` matches what the site owner agreed to.
 - [ ] No unreplaced template placeholders remain.
 - [ ] Structured data validates.
 - [ ] No fake review/rating schema added.
@@ -38,6 +39,7 @@
 - [ ] Search Console property added.
 - [ ] Sitemap submitted.
 - [ ] URL inspected.
+- [ ] `llms.txt` links point to the final live URL.
 - [ ] Google Business Profile updated, if local business.
 - [ ] Custom domain added to business/social profiles, if available.
 
@@ -48,3 +50,4 @@
 - [ ] Reviews requested from real customers.
 - [ ] Core Web Vitals monitored.
 - [ ] Search Console indexing checked again after crawl.
+- [ ] Generative AI performance report checked in Search Console, if available.

@@ -1,4 +1,8 @@
 User-agent: *
 Allow: /
 
+# Optional: ask the site owner before adding AI-crawler rules here.
+# See references/ai-crawlers-and-llms-txt.md for the training-vs-citation
+# bot distinction and an example "allow citations, block training" block.
+
 Sitemap: {{SITEMAP_URL}}

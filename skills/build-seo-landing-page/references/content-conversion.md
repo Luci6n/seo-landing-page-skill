@@ -137,4 +137,8 @@ Answer-engine and generative-engine readiness improves when copy is:
 - Easy to quote or summarize.
 - Consistent with structured data.
 
+Lead the page's main question with a direct 40-60 word answer before the supporting detail; AI retrieval tends to weigh a page's opening content most heavily.
+
 Good FAQ answers are short but complete. Put important facts in visible HTML, not only metadata.
+
+Keep genuinely time-sensitive facts (hours, pricing notes, service list) current, and show a visible last-updated date when the page or its facts change over time. AI systems weigh recency when choosing which sources to cite, but only claim a date that reflects a real edit.

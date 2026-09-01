@@ -80,6 +80,14 @@ for (const iconPath of ["favicon.ico", "favicon.png", "apple-touch-icon.png"]) {
   checks.push(result(`${iconPath} exists`, existsSync(path.join(projectRoot, iconPath)) ? "pass" : "warn"));
 }
 
+const llmsTxt = readIfExists("llms.txt");
+checks.push(result("llms.txt exists", llmsTxt ? "pass" : "warn", "Optional AI-crawler guidance file; not required."));
+if (llmsTxt) {
+  checks.push(result("llms.txt has an H1 title", /^#\s+\S/m.test(llmsTxt) ? "pass" : "fail"));
+  checks.push(result("llms.txt has a summary blockquote", /^>\s*\S/m.test(llmsTxt) ? "pass" : "warn"));
+  checks.push(result("llms.txt has no template placeholders", /\{\{[^}]+\}\}/.test(llmsTxt) ? "fail" : "pass"));
+}
+
 const passed = checks.filter((check) => check.status === "pass").length;
 const warned = checks.filter((check) => check.status === "warn").length;
 const failed = checks.filter((check) => check.status === "fail").length;
