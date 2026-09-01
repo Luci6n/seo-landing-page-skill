@@ -1,13 +1,4 @@
-<!--
-  Do not ship this as a standalone node. On its own an OfferCatalog says
-  nothing about whose services these are. Reference it from the business or
-  organization node so the graph connects:
-
-    "hasOfferCatalog": { "@id": "{{CANONICAL_URL}}#offer-catalog" }
-
-  Also give each Service a "provider" pointing at the business @id if the
-  catalog is emitted as a separate script rather than nested inline.
--->
+<!-- Link from the business node: "hasOfferCatalog": { "@id": "...#offer-catalog" } -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",

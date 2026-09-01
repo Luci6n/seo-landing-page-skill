@@ -206,6 +206,12 @@ Include:
 - Visible business facts
 - Sitemap and robots
 
+## 5A. Supporting Pages
+
+`templates/privacy-notice.md` is a minimal starting point for a brochure site with analytics and a contact method. It is not legal advice and is not compliant as written. A real notice usually also needs the data controller's legal identity, the legal basis for processing, retention periods, the visitor's rights (access, correction, deletion, withdrawal of consent), and a cookie or consent mechanism wherever tracking runs. GDPR, the UK GDPR, and Malaysia's PDPA each add their own requirements.
+
+Tell the user plainly that the generated notice is a draft to be reviewed, and never describe a site as compliant on the strength of this template.
+
 ## 6. Verify
 
 Check:
