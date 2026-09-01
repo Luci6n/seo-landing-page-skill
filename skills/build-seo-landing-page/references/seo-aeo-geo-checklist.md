@@ -19,6 +19,7 @@ GEO improves generative engine understanding of the entity, offer, and facts.
 - Image alt text and dimensions.
 - Social preview metadata.
 - Favicon and site-name hints.
+- Skip legacy `geo.region`/`geo.placename` meta tags as a local signal; Google does not use them (Bing still references them). Visible NAP, `LocalBusiness` schema, and a Google Business Profile are what carry location.
 
 ## Local SEO
 

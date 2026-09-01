@@ -33,6 +33,18 @@ For other page types, consider:
 - `BreadcrumbList` for multi-page sites with hierarchy.
 - `Article` or `BlogPosting` for editorial content.
 
+## Connect The Graph
+
+Emit structured data as a connected graph, not loose nodes. An `OfferCatalog` or `Service` block that nothing references says nothing about whose services it describes.
+
+Reference the catalog from the business or organization node:
+
+```json
+"hasOfferCatalog": { "@id": "https://example.com/#offer-catalog" }
+```
+
+When a catalog ships as its own `<script>` rather than nested inline, also give each `Service` a `provider` pointing at the business `@id`.
+
 ## Stable IDs
 
 Use stable `@id` values:
