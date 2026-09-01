@@ -64,6 +64,17 @@ function hasLinkRel(rel) {
   });
 }
 
+// Google Search supports BMP, GIF, ICO, PNG, JPEG, PPM and TIFF favicons, but
+// not SVG. A site whose only icon is an SVG gets no favicon in search results.
+function hasNonSvgFavicon() {
+  return linkTags.some((attrs) => {
+    const rels = (attrs.rel || "").toLowerCase().split(/\s+/);
+    if (!rels.includes("icon") && !rels.includes("shortcut")) return false;
+    const href = (attrs.href || "").toLowerCase().split("?")[0];
+    return attrs.type?.toLowerCase() !== "image/svg+xml" && !href.endsWith(".svg");
+  });
+}
+
 const title = matchText(/<title[^>]*>([\s\S]*?)<\/title>/i);
 const description = getMetaContent("name", "description");
 const h1Count = count(/<h1\b/gi);
@@ -89,6 +100,11 @@ const checks = [
   result("Open Graph image exists", hasMeta("property", "og:image") ? "pass" : "warn"),
   result("Twitter card exists", hasMeta("name", "twitter:card") ? "pass" : "warn"),
   result("Favicon exists", hasLinkRel("icon") ? "pass" : "warn"),
+  result(
+    "Favicon uses a format Google supports",
+    !hasLinkRel("icon") || hasNonSvgFavicon() ? "pass" : "warn",
+    "Google Search does not support SVG favicons. Add a PNG or ICO alongside it."
+  ),
   result("Apple touch icon exists", hasLinkRel("apple-touch-icon") ? "pass" : "warn"),
   result("Web manifest exists", hasLinkRel("manifest") ? "pass" : "warn"),
   result("Exactly one H1", h1Count === 1 ? "pass" : "fail", `${h1Count} h1 element(s).`),

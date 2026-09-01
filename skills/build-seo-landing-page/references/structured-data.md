@@ -7,6 +7,7 @@ Structured data should match visible page content. Do not use schema to make cla
 ## Contents
 
 - Recommended Types
+- Connect The Graph
 - Stable IDs
 - LocalBusiness Essentials
 - Service vs Product

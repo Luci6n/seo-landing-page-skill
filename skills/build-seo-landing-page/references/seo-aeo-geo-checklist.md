@@ -18,7 +18,7 @@ GEO improves generative engine understanding of the entity, offer, and facts.
 - Sitemap and robots.
 - Image alt text and dimensions.
 - Social preview metadata.
-- Favicon and site-name hints.
+- Favicon and site-name hints. Google Search supports BMP, GIF, ICO, PNG, JPEG, PPM and TIFF — **not SVG** — so a site whose only icon is an SVG gets no favicon in results. Keep a PNG or ICO alongside it. The icon must be square, larger than 48x48px is recommended, its URL should stay stable, and `Googlebot-Image` must be able to crawl it while `Googlebot` can reach the home page. Google uses one favicon per hostname, so a subdirectory cannot have its own.
 - Skip legacy `geo.region`/`geo.placename` meta tags as a local signal; Google does not use them (Bing still references them). Visible NAP, `LocalBusiness` schema, and a Google Business Profile are what carry location.
 
 ## Local SEO
@@ -54,6 +54,20 @@ GEO improves generative engine understanding of the entity, offer, and facts.
 - Visible last-updated or freshness signal on content that changes (hours, pricing notes, service list) — AI systems weigh recency when choosing sources to cite.
 - AI crawlers (training and citation bots) are not accidentally blocked by `robots.txt` or the CDN/WAF, unless the site owner deliberately chose to block them.
 - `llms.txt` exists at the site root with real links, not placeholders.
+
+## What Google Says To Ignore
+
+Google publishes a mythbusting list for AEO/GEO. These are its words on what does **not** help in Google Search, and they override the folk advice circulating online:
+
+- **`llms.txt` and other "special" markup.** "Google Search itself doesn't use them" and maintaining one "will neither harm nor help your site's visibility or rankings in Google Search."
+- **Chunking content.** No requirement to break content into small pieces; "there's no ideal page length."
+- **Rewriting content just for AI systems.** AI understands synonyms and intent, so chasing long-tail keyword variations is wasted effort.
+- **Seeking inauthentic mentions.** Manufactured mentions across the web are not the lever they are sold as.
+- **Overfocusing on structured data.** It "isn't required for generative AI search", though it remains worth doing for ordinary rich-result eligibility.
+
+Google also warns to "be wary of third-party tools that promise ranking success or claim to use 'internal' Google metrics", since no third-party tool can see its ranking or AI systems. Quote a tool's number as that tool's estimate, never as Google's.
+
+Do not sell any of the above to a client as an AI-visibility win. The things that do matter are the ordinary ones: crawlable content, useful text, accurate structured data that matches the page, and real business facts.
 
 ## AI Crawlers And llms.txt
 
