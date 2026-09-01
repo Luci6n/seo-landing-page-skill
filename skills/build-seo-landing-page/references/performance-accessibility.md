@@ -21,11 +21,19 @@ Framework notes:
 
 ## Core Web Vitals
 
-Watch:
+The three metrics and their "good" thresholds, measured at the 75th percentile across mobile and desktop:
 
-- LCP: hero image/text loading.
-- CLS: layout shifts from images, ads, embeds, fonts, and late class changes.
-- INP: expensive JavaScript or slow interactions.
+- LCP, 2.5s or less: hero image/text loading.
+- INP, 200ms or less: expensive JavaScript or slow interactions.
+- CLS, 0.1 or less: layout shifts from images, ads, embeds, fonts, and late class changes.
+
+Lab vs field matters when reporting these:
+
+- Lighthouse and PageSpeed lab runs **cannot measure INP** — they load the page without interacting with it. Total Blocking Time is a rough proxy, not a substitute. Never report an INP figure from a Lighthouse run.
+- Lab LCP and CLS are estimates from a single simulated run, not the field values Google actually uses.
+- Real Core Web Vitals come from field data: CrUX, the PageSpeed "real-world" section, or the Search Console Core Web Vitals report. A new site has no field data yet, and that is not the same as passing.
+
+Report which one a number came from, and do not present a lab score as the site's Core Web Vitals.
 
 ## CLS-Safe Motion
 
