@@ -143,6 +143,32 @@ Remember:
 - Search Console may show old crawled data until Google recrawls.
 - Product schema needs real offer/review/rating data when used for rich results.
 
+## Providing Credentials Safely
+
+Scripts read credentials from environment variables only. There is deliberately no prompt and no `--key` flag.
+
+Have the user set the variable in their own terminal **before starting the agent session**, so the value is inherited without ever entering the conversation:
+
+```powershell
+# PowerShell - lasts for this terminal session only
+$env:PAGESPEED_API_KEY = "your-key"
+```
+
+```bash
+# bash/zsh - lasts for this terminal session only
+export PAGESPEED_API_KEY="your-key"
+```
+
+To persist across reboots instead, use `setx PAGESPEED_API_KEY "your-key"` on Windows (takes effect in new terminals) or a shell profile entry. That is convenient but no longer session-scoped, so it suits a personal machine rather than a shared one.
+
+Three things to avoid, in order of severity:
+
+- Do not ask the user to paste a key into the chat. It is then in the transcript and logs for good.
+- Do not inline a key into a command, such as `PAGESPEED_API_KEY=... node run-pagespeed.mjs`. Same exposure, plus shell history and the process list.
+- Do not write a key into `.env`, project config, or any tracked file unless the user explicitly asks.
+
+Two practical notes. Environment variables exported inside one agent command do not carry over to the next, because each command runs in a fresh shell — so the variable must come from the user's own environment. And PageSpeed works with no key at all, just on shared quota, so try keyless first and only ask for a key after an actual `429`.
+
 ## Search Console
 
 Search Console API scripts require a verified property and OAuth token:

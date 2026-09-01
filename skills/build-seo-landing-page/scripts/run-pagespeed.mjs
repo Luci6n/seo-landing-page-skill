@@ -38,12 +38,19 @@ const body = await response.text();
 const outputPath = path.join(reportsDir, `pagespeed-${strategy}.json`);
 writeFileSync(outputPath, body);
 
-if (!response.ok) {
+if (response.ok) {
+  console.log(`PageSpeed report written to ${outputPath}`);
+} else {
+  // Set exitCode rather than calling process.exit(): an immediate exit while
+  // the HTTP connection is still closing aborts the process on Windows.
+  process.exitCode = 1;
   console.error(`PageSpeed API failed with HTTP ${response.status}. Report written to ${outputPath}`);
   if (response.status === 429) {
-    console.error("Quota exceeded. Set PAGESPEED_API_KEY or fall back to Lighthouse CLI.");
+    console.error("Quota exceeded on the shared no-key allowance. Options:");
+    console.error("  - Set a key in your own terminal, then re-run:");
+    console.error('      PowerShell:  $env:PAGESPEED_API_KEY = "your-key"');
+    console.error('      bash/zsh:    export PAGESPEED_API_KEY="your-key"');
+    console.error("  - Or fall back to the Lighthouse CLI (lab data only, no field metrics).");
+    console.error("Do not paste the key into a chat or inline it into this command.");
   }
-  process.exit(1);
 }
-
-console.log(`PageSpeed report written to ${outputPath}`);
