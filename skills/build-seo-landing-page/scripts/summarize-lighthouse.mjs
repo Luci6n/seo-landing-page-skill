@@ -47,12 +47,13 @@ const lines = [
   `- Best Practices: ${score("best-practices")}`,
   `- SEO: ${score("seo")}`,
   "",
-  "## Core Metrics",
+  "## Lab Metrics",
   "",
   `- LCP: ${auditValue("largest-contentful-paint")}`,
   `- CLS: ${auditValue("cumulative-layout-shift")}`,
   `- TBT: ${auditValue("total-blocking-time")}`,
   `- Speed Index: ${auditValue("speed-index")}`,
+  "- INP: not measured in lab runs (needs real interactions; TBT above is a rough proxy only).",
   "",
   "## Top Audits To Review",
   "",
@@ -61,6 +62,7 @@ const lines = [
   "## Notes",
   "",
   "- Lighthouse is lab data from one run. Re-test after important content, asset, or script changes.",
+  "- Lab LCP and CLS are estimates, not the field values Google uses. Only CrUX/Search Console field data reflects real users.",
   "- Check the rendered page manually for layout, copy, and conversion quality."
 ];
 
