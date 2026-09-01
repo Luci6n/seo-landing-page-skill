@@ -8,6 +8,7 @@ Use this when a project needs an `llms.txt` file, an AI-crawler access decision 
 - llms-full.txt
 - AI Crawler Access In robots.txt
 - Chinese AI Platforms And Crawlers
+- Verifying A Bot Is Who It Claims
 - Notes
 - Google Search Console: Generative AI Performance
 - FAQ And HowTo Rich Results Are Deprecated
@@ -39,7 +40,7 @@ AI crawlers fall into three groups. Tokens below are as documented by each provi
 
 - **Training crawlers** collect content that may train future models: `GPTBot` (OpenAI), `ClaudeBot` (Anthropic), `CCBot` (Common Crawl). `Google-Extended` belongs here too, but note its exact scope: it controls use of content for training Gemini models *and* for grounding in Gemini Apps / Vertex AI — it is not a general Google AI switch.
 - **Search/citation crawlers** index content so it can be surfaced and cited in AI search: `OAI-SearchBot` (ChatGPT search), `Claude-SearchBot`, `PerplexityBot`.
-- **User-initiated fetchers** load a page because a person asked a specific question right now: `ChatGPT-User`, `Claude-User`, `Perplexity-User`. OpenAI and Perplexity both document that these agents may not follow `robots.txt`, since a user — not a crawler — initiated the request. Listing them is still fine as a statement of intent, but do not rely on a `robots.txt` rule to control them.
+- **User-initiated fetchers** load a page because a person asked a specific question right now: `ChatGPT-User`, `Claude-User`, `Perplexity-User`. Google runs its own set too — `Google-NotebookLM`, `Google-GeminiNotebook`, `Google-CWS`, `Google-Pinpoint`, `Google-Read-Aloud`, `Google-Site-Verifier` — and states plainly that "because the fetch was requested by a user, these fetchers generally ignore robots.txt rules." OpenAI and Perplexity document the same behaviour for theirs. Listing these agents is fine as a statement of intent, but never rely on a `robots.txt` rule to control them.
 
 **Google AI Overviews and AI Mode are not governed by any of these tokens.** They are part of Google Search, so they follow normal `Googlebot` access plus the Search generative AI control in Search Console (see below). Google states explicitly that `Google-Extended` does not affect inclusion in Google Search and is not a ranking signal. Blocking `GPTBot`, `ClaudeBot`, `Google-Extended`, or `CCBot` therefore has no effect on AI Overviews eligibility — it affects model training and assistant answers, not Google's own AI surfaces.
 
@@ -105,6 +106,18 @@ Two practical consequences:
 
 - For blocking: `robots.txt` is not a reliable lever across these platforms. Server, CDN, or WAF rules are the real control, and identifying the traffic usually means rate and behavior analysis rather than a user-agent match.
 - For visibility: many Chinese assistants answer using a search backend rather than their own crawler, so being findable in them tracks ordinary indexability in the search engines they ground on — plus crawlable, server-rendered content. There is no allow-rule that buys inclusion.
+
+## Verifying A Bot Is Who It Claims
+
+A user-agent string is self-reported and trivially spoofed, so never treat one as proof. This matters in both directions: unwanted scrapers impersonate reputable crawlers, and a WAF rule keyed on a spoofable string blocks the honest bots while missing the dishonest ones.
+
+Established verification, in order of reliability:
+
+- Reverse DNS lookup on the requesting IP, then a forward lookup to confirm it resolves back — the long-standing method for Googlebot and most major crawlers.
+- Published IP range lists. Google publishes JSON range files for its crawlers and user-triggered fetchers; several other operators do the same.
+- Behavioural signals (request rate, path patterns) when no token or range list exists — the only option for the Chinese platforms discussed above.
+
+Emerging: **Web Bot Auth**, an IETF draft protocol that has bots cryptographically sign their requests rather than relying on headers and IP addresses. Google is testing it experimentally with some AI agents on its infrastructure and explicitly warns that not every request from a given agent is signed, so fall back to the established methods. Treat it as worth watching, not as something to build a client's access policy on yet.
 
 ## Notes
 
