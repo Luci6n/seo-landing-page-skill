@@ -13,7 +13,7 @@ Use this when a project needs an `llms.txt` file, an AI-crawler access decision 
 
 ## llms.txt
 
-`llms.txt` is a community-drafted convention (proposed 2024, still not an official W3C/IETF standard as of 2026), published at the site root as `/llms.txt`. It gives AI agents and assistants a short, curated Markdown map of a site instead of raw HTML. Some coding-agent tools (Claude Code, Cursor, Windsurf, GitHub Copilot, Cline, Aider) already fetch `/llms.txt` automatically when pointed at a docs-style site.
+`llms.txt` is a community-drafted convention (proposed 2024) published at the site root as `/llms.txt`. Formalization has been discussed — there is an open W3C strategy issue and related IETF crawler work — but as of 2026 nothing is ratified, so treat it as a convention, not a standard. It gives AI agents and assistants a short, curated Markdown map of a site instead of raw HTML. Some coding-agent tools (Claude Code, Cursor, Windsurf, GitHub Copilot, Cline, Aider) already fetch `/llms.txt` automatically when pointed at a docs-style site.
 
 Format, in order:
 
@@ -33,16 +33,19 @@ For a single-page landing site, keep it short: project/business name, a one-line
 
 ## AI Crawler Access In robots.txt
 
-AI crawlers fall into two groups:
+AI crawlers fall into three groups. Tokens below are as documented by each provider:
 
-- **Training crawlers** collect content to train future models: `GPTBot`, `ClaudeBot`, `Google-Extended`, `CCBot`.
-- **Retrieval/citation crawlers** fetch content live to answer a specific prompt or power AI-search citations: `OAI-SearchBot`, `ChatGPT-User`, `Claude-SearchBot`, `Claude-User`, `PerplexityBot`, `Perplexity-User`.
+- **Training crawlers** collect content that may train future models: `GPTBot` (OpenAI), `ClaudeBot` (Anthropic), `CCBot` (Common Crawl). `Google-Extended` belongs here too, but note its exact scope: it controls use of content for training Gemini models *and* for grounding in Gemini Apps / Vertex AI — it is not a general Google AI switch.
+- **Search/citation crawlers** index content so it can be surfaced and cited in AI search: `OAI-SearchBot` (ChatGPT search), `Claude-SearchBot`, `PerplexityBot`.
+- **User-initiated fetchers** load a page because a person asked a specific question right now: `ChatGPT-User`, `Claude-User`, `Perplexity-User`. OpenAI and Perplexity both document that these agents may not follow `robots.txt`, since a user — not a crawler — initiated the request. Listing them is still fine as a statement of intent, but do not rely on a `robots.txt` rule to control them.
+
+**Google AI Overviews and AI Mode are not governed by any of these tokens.** They are part of Google Search, so they follow normal `Googlebot` access plus the Search generative AI control in Search Console (see below). Google states explicitly that `Google-Extended` does not affect inclusion in Google Search and is not a ranking signal. Blocking `GPTBot`, `ClaudeBot`, `Google-Extended`, or `CCBot` therefore has no effect on AI Overviews eligibility — it affects model training and assistant answers, not Google's own AI surfaces.
 
 `templates/robots.txt` ships permissive (`Allow: /` for all agents) with no AI-bot rules baked in — add the block below to the project's actual `robots.txt` only after the site owner picks a policy; this is a real exposure decision, not just a code style choice:
 
-- Allow both groups: maximum AI visibility and possible AI-search citations, but content may also be used for model training.
-- Allow retrieval/citation bots, block training bots: the common 2026 middle path — stay eligible for AI-search citations while opting out of training use.
-- Block all AI bots: maximum content control, but the page becomes ineligible for AI Overviews, AI Mode, and assistant citations.
+- Allow everything: maximum AI visibility, but content may also be used for model training.
+- Allow search/citation bots, block training bots: the common 2026 middle path — stay citable in ChatGPT search, Claude, and Perplexity while opting out of training use.
+- Block all AI bots: maximum content control, and the site loses eligibility for assistant citations in ChatGPT/Claude/Perplexity. Google AI Overviews and AI Mode are unaffected by this choice — opt out of those separately in Search Console.
 
 Example `robots.txt` block for the "allow citations, block training" policy:
 
@@ -62,16 +65,17 @@ Disallow: /
 User-agent: OAI-SearchBot
 Allow: /
 
-User-agent: ChatGPT-User
-Allow: /
-
 User-agent: Claude-SearchBot
 Allow: /
 
-User-agent: Claude-User
+User-agent: PerplexityBot
 Allow: /
 
-User-agent: PerplexityBot
+# User-initiated agents; these may fetch regardless of robots.txt.
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Claude-User
 Allow: /
 
 User-agent: Perplexity-User
@@ -93,6 +97,13 @@ Search Console has a Generative AI performance report, available worldwide as of
 - Not included: clicks, query/prompt text, or ranking position.
 - Subject to the standard Search Console 1,000-row limit; the newest data points can be incomplete (shown as dotted lines) until they finalize.
 
+Controls Google documents for its own AI surfaces (these, not the AI-bot tokens above, are what govern AI Overviews and AI Mode):
+
+- `robots.txt` rules for `Googlebot` — blocking Googlebot removes the page from Search entirely, AI features included.
+- `noindex` to drop the page from Search.
+- `nosnippet`, `data-nosnippet`, and `max-snippet` to limit how much text may be shown — useful when a site wants to stay indexed but restrict how much of its content AI features can quote.
+- The Search Console Search generative AI control described below.
+
 Under Settings > Search generative AI, a site can choose Include / Exclude / Inherit for whether its content is eligible for these AI features. Google states this control does not act as a ranking or inclusion signal for the rest of Search — excluding a site from AI features does not change its normal organic ranking, and included content may still be used to help Google understand queries generally.
 
 When reporting AI-search visibility, only state what the report actually shows (impressions by page/country/device/date). Do not claim clicks, ranking, or citation frequency that the report does not provide, and do not claim to have checked this report unless it was actually available and viewed.
@@ -110,7 +121,8 @@ Because of this:
 
 ## Honest Expectations
 
-- `llms.txt` adoption is still low (roughly one in ten sites as of early 2026), and independent tracking has not found a measurable citation-rate lift from adding it. Present it as low-cost, forward-looking hygiene — not a guaranteed AI-visibility win.
-- No special schema markup is required for AI Overviews or AI Mode; schema helps trust and understanding, not eligibility by itself.
+- Google's AI-features documentation states directly that no special files or markup are needed: "You don't need to create new machine readable files, AI text files, or markup to appear in these features. There's also no special schema.org structured data that you need to add." An `llms.txt` file does nothing for Google AI Overviews or AI Mode. Its value, if any, is with assistants and agent tooling that actually fetch it.
+- `llms.txt` adoption is still low (roughly one in ten sites in a ~300,000-domain survey, concentrated in tech), and independent tracking has not found a measurable citation-rate lift from adding it. Present it as low-cost, forward-looking hygiene — not a guaranteed AI-visibility win. If a client expects ranking or citation gains from it, correct that expectation.
+- Per Google, eligibility for AI Overviews/AI Mode is simply being indexed and eligible to show with a snippet — normal SEO fundamentals, not a separate discipline.
 - Structured data must match what is visible on the page — see `references/structured-data.md`. Treat this as a standing rule, not a hedge against a specific predicted AI behavior.
 - Do not promise AI Overview inclusion, AI citation, or assistant recommendation as the guaranteed outcome of any single change.
