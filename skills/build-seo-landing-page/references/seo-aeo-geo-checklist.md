@@ -40,13 +40,13 @@ GEO improves generative engine understanding of the entity, offer, and facts.
 - Services are explained in plain language.
 - Contact, hours, location, and availability are easy to extract.
 - Avoid vague marketing-only copy.
-- `FAQPage` schema is worth keeping for AI/answer-engine parsing even though it no longer produces a Google rich result (deprecated May 2026) — see `references/ai-crawlers-and-llms-txt.md`.
+- `FAQPage` schema is worth keeping for AI/answer-engine parsing even though it no longer produces a Google rich result (FAQ removed May 7, 2026; HowTo removed 2023) — see `references/ai-crawlers-and-llms-txt.md`.
 
 ## GEO
 
 - Clear entity identity.
 - Clear relationship between business, services, locations, and contact methods.
-- Structured data uses stable IDs and URLs, and matches what is visibly on the page (AI systems cross-check schema against live content).
+- Structured data uses stable IDs and URLs, and matches what is visibly on the page.
 - Avoid unsupported claims.
 - Avoid fake ratings or reviews.
 - Include external profile links with `sameAs` only when official.

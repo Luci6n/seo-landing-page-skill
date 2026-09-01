@@ -88,4 +88,4 @@ For ordinary pages, the safe flow is:
 
 ## Generative AI Performance Report
 
-Search Console has a dedicated Generative AI performance report (rolling out from mid-2026) covering impressions across AI Overviews, AI Mode, and AI features in Discover, by page/country/device/date. It has no click, prompt-level, or ranking data, and there is a site-level opt-out toggle for AI features. Only report what this view actually shows; see `references/ai-crawlers-and-llms-txt.md` for detail and honesty limits.
+Search Console has a Generative AI performance report (worldwide as of August 31, 2026) covering AI Overviews and AI Mode impressions by page/country/device/date, plus a Settings > Search generative AI include/exclude control that does not affect normal organic ranking. It has no click, prompt-level, or ranking data. Only report what this view actually shows; see `references/ai-crawlers-and-llms-txt.md` for detail and honesty limits.

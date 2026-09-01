@@ -29,7 +29,7 @@ Do not use this skill for tiny copy, style, or component edits unless SEO, conve
 - Treat custom domain, Google Business Profile, reviews, citations, Search Console, and real photos as launch/off-site work, not just code tweaks.
 - After domain or deploy changes, update canonical, sitemap, robots sitemap URL, structured data URLs, social image URLs, and Search Console property.
 - Do not fake ratings, reviews, guarantees, rankings, indexing, Core Web Vitals, Lighthouse/PageSpeed scores, deployment status, AI Overview/AI citation status, or API results.
-- FAQ and HowTo schema no longer produce Google rich results (deprecated May 2026); keep `FAQPage` schema for AI/answer-engine understanding, not for a promised SERP feature.
+- FAQ and HowTo schema no longer produce Google rich results (FAQ removed May 7, 2026; HowTo removed 2023); keep `FAQPage` schema for AI/answer-engine understanding, not for a promised SERP feature.
 - Treat AI-crawler access (`robots.txt` training vs. citation bots) and `llms.txt` as launch-readiness items, and ask the site owner before changing AI-bot access, since it changes real AI-search exposure.
 - Match the design to the page type and audience; prioritize clarity, trust, mobile usability, and conversion over decoration.
 
