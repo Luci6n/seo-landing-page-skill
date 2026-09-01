@@ -57,7 +57,7 @@ Use templates only as starting points. Adapt them to the project before insertin
 - `templates/sitemap.xml`
 - `templates/local-business-jsonld.html`
 - `templates/website-jsonld.html`
-- `templates/website-with-search-jsonld.html`
+- `templates/website-with-search-jsonld.html` - legacy; its `SearchAction` no longer produces a Google feature
 - `templates/organization-jsonld.html`
 - `templates/person-jsonld.html`
 - `templates/breadcrumb-jsonld.html`

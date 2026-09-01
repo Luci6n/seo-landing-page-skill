@@ -7,6 +7,7 @@ Use this when a project needs an `llms.txt` file, an AI-crawler access decision 
 - llms.txt
 - llms-full.txt
 - AI Crawler Access In robots.txt
+- Chinese AI Platforms And Crawlers
 - Google Search Console: Generative AI Performance
 - FAQ And HowTo Rich Results Are Deprecated
 - Honest Expectations
@@ -82,7 +83,28 @@ User-agent: Perplexity-User
 Allow: /
 ```
 
-Notes:
+## Chinese AI Platforms And Crawlers
+
+Relevant when the business serves China, or a market where Chinese assistants and search engines are used. These do **not** work like the Western four above, so do not assume the same `robots.txt` contract applies.
+
+Chinese search engines publish long-established crawler tokens that generally honor `robots.txt`. If the audience is in China, these matter more than any AI-bot rule:
+
+- `Baiduspider` (Baidu)
+- `Sogou web spider` (Sogou)
+- `360Spider` (360)
+- `YisouSpider` (Shenma)
+- `PetalBot` (Huawei Petal Search)
+
+`Bytespider` is ByteDance's crawler and feeds its AI products, including the Doubao assistant. It is real, widely seen in logs, and identifies itself. ByteDance states it follows the robots exclusion protocol, but independent reporting has repeatedly documented it fetching disallowed paths — including a first-half-2026 study finding it reached disallowed pages on close to half the sites naming it. Treat `robots.txt` as a statement of intent here and use server/CDN/WAF rules if the block must actually hold.
+
+For **DeepSeek, Qwen, Kimi, and GLM specifically: no first-party crawler user agent is published** that could be verified against vendor documentation. DeepSeek's own repo describes self-collected data "respecting robots.txt", but it publishes no user-agent token, and its fetches have been reported to look like ordinary browser traffic. Third-party bot directories circulate names like `DeepSeekBot`, `QwenBot`, `KimiBot`, and `ChatGLM-Spider`; these are **not vendor-documented**. Do not add them to a client's `robots.txt` and imply they will work — an unrecognized token is an inert line that creates false confidence.
+
+Two practical consequences:
+
+- For blocking: `robots.txt` is not a reliable lever against these platforms. Server, CDN, or WAF rules are the real control, and identifying the traffic may require rate/behavior analysis rather than a user-agent match.
+- For visibility: many Chinese assistants answer using a search backend rather than their own crawler, so being findable in them tracks ordinary indexability in the search engines they ground on — plus crawlable, server-rendered content. There is no allow-rule that buys inclusion.
+
+## Notes
 
 - Major providers say their bots honor `robots.txt`, but this is a courtesy signal, not enforcement. For hard blocking, use server, CDN, or WAF rules.
 - A CDN or WAF can silently block AI bots even when `robots.txt` allows them. If AI visibility matters to the business, check CDN/WAF bot-management settings too, not just `robots.txt`.

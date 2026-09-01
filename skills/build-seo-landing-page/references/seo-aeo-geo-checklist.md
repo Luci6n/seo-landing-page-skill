@@ -36,7 +36,7 @@ GEO improves generative engine understanding of the entity, offer, and facts.
 
 - FAQ questions written like real customer questions.
 - Answers are short, direct, and factual.
-- A direct 40-60 word answer to the page's main question appears near the top, before supporting detail.
+- The page answers its main question in the opening lines, before supporting detail.
 - Services are explained in plain language.
 - Contact, hours, location, and availability are easy to extract.
 - Avoid vague marketing-only copy.
