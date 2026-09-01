@@ -108,7 +108,9 @@ Use `WebSite` schema to suggest a concise site name:
 
 Google may still choose another site name until it trusts the brand/domain.
 
-Add `SearchAction` only when the website has real site search. For simple one-page landing pages, do not include search action markup.
+Do not add `SearchAction` expecting a Google feature. Google retired the sitelinks search box on November 21, 2024 and removed its Search Console report and Rich Results Test support, so `WebSite` + `potentialAction`/`SearchAction` no longer produces anything in Google Search.
+
+The rest of `WebSite` schema is still supported and still worth including — Google continues to use it for the site name. Existing `SearchAction` markup does not need to be ripped out; unsupported structured data does not cause Search errors. Just do not add it to new pages as an SEO win, and never add it to a one-page landing site with no real site search.
 
 ## FAQPage
 
