@@ -24,11 +24,13 @@ const response = await fetch(endpoint, {
   }
 });
 
-if (!response.ok) {
-  const text = await response.text();
+if (response.ok) {
+  console.log(`Submitted sitemap: ${sitemapUrl}`);
+  console.log("Submitted is not indexed. Check coverage later before reporting success.");
+} else {
+  // Set exitCode rather than calling process.exit(): an immediate exit while
+  // the HTTP connection is still closing aborts the process on Windows.
+  process.exitCode = 1;
   console.error(`Sitemap submit failed with HTTP ${response.status}`);
-  console.error(text);
-  process.exit(1);
+  console.error(await response.text());
 }
-
-console.log(`Submitted sitemap: ${sitemapUrl}`);

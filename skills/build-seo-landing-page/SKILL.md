@@ -89,7 +89,9 @@ Use `PAGESPEED_API_KEY` for PageSpeed API calls when available.
 
 Use `GOOGLE_SEARCH_CONSOLE_ACCESS_TOKEN` only for supported Search Console API actions.
 
-If a requested API-backed action needs credentials and the required environment variable is missing, ask the user for the secret only at that point and use it for the current session only by default. Do not write secrets to `.env`, tracked files, or project config unless the user explicitly asks for that.
+If a requested API-backed action needs credentials and the environment variable is missing, ask the user to export it in their own terminal. Do not ask them to paste the secret into the conversation, and never type a key into a command yourself: a pasted or inlined key lands in the transcript and logs, while an exported variable is inherited by these scripts without ever entering the conversation. `references/validation-workflow.md` has the per-shell commands.
+
+Do not write secrets to `.env`, tracked files, or project config unless the user explicitly asks for that.
 
 If credentials, network, dependencies, or quota are unavailable, do not fake success. Explain the blocker and provide manual steps or fallback commands.
 
@@ -99,7 +101,7 @@ When unsure about usage, run the script with missing arguments to see its usage 
 
 - Prefer concrete file edits over generic advice.
 - Preserve existing project conventions.
-- Ask for credentials only when required by the requested action, and use them for the current session only by default.
+- Ask for credentials only when the requested action needs them, and have the user export them rather than paste them.
 - Do not keyword-stuff.
 - Do not add fake ratings, fake reviews, or unsupported claims.
 - Do not promise ranking, indexing, or Core Web Vitals outcomes.

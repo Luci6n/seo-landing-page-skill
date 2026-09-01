@@ -38,9 +38,11 @@ mkdirSync(reportsDir, { recursive: true });
 const outputPath = path.join(reportsDir, "search-console-url-inspection.json");
 writeFileSync(outputPath, body);
 
-if (!response.ok) {
+if (response.ok) {
+  console.log(`URL Inspection report written to ${outputPath}`);
+} else {
+  // Set exitCode rather than calling process.exit(): an immediate exit while
+  // the HTTP connection is still closing aborts the process on Windows.
+  process.exitCode = 1;
   console.error(`URL Inspection API failed with HTTP ${response.status}. Response written to ${outputPath}`);
-  process.exit(1);
 }
-
-console.log(`URL Inspection report written to ${outputPath}`);
