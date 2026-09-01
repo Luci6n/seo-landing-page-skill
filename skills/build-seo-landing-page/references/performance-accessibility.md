@@ -62,3 +62,5 @@ Risky:
 - Keep language attributes accurate.
 - Support reduced motion.
 - Ensure mobile menu state uses `aria-expanded`.
+
+Accessibility now has a second audience. Google notes that browser-based AI agents inspect a page by analysing its visual rendering, DOM structure, and **accessibility tree** to complete tasks. Semantic HTML, real button and link elements, labelled form fields, and accurate ARIA state therefore make a page legible to agents for the same reasons they make it usable with a screen reader. This is a reason to do accessibility properly, not a separate "agent optimization" task.

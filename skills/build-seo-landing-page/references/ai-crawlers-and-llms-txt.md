@@ -161,7 +161,8 @@ Because of this:
 
 ## Honest Expectations
 
-- Google's AI-features documentation states directly that no special files or markup are needed: "You don't need to create new machine readable files, AI text files, or markup to appear in these features. There's also no special schema.org structured data that you need to add." An `llms.txt` file does nothing for Google AI Overviews or AI Mode. Its value, if any, is with assistants and agent tooling that actually fetch it.
+- Google has addressed `llms.txt` by name, in its AI optimization guide's mythbusting section: "Google Search itself doesn't use them", and maintaining one "will neither harm nor help your site's visibility or rankings in Google Search, as Google Search ignores them." It also says it is "completely fine" to keep one for other services that do use it. So for Google it is neither a win nor a risk. Its value, if any, is with assistants and agent tooling that actually fetch it.
+- The same applies to markup generally: "You don't need to create new machine readable files, AI text files, or markup to appear in these features. There's also no special schema.org structured data that you need to add."
 - `llms.txt` adoption is still low (roughly one in ten sites in a ~300,000-domain survey, concentrated in tech), and independent tracking has not found a measurable citation-rate lift from adding it. Present it as low-cost, forward-looking hygiene — not a guaranteed AI-visibility win. If a client expects ranking or citation gains from it, correct that expectation.
 - Per Google, eligibility for AI Overviews/AI Mode is simply being indexed and eligible to show with a snippet — normal SEO fundamentals, not a separate discipline.
 - Structured data must match what is visible on the page — see `references/structured-data.md`. Treat this as a standing rule, not a hedge against a specific predicted AI behavior.

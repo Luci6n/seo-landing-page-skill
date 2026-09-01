@@ -7,9 +7,12 @@ Use this when checking whether a landing page is ready before or after deploymen
 - Validation Order
 - Static Local Checks
 - Link And Asset Checks
+- Support File Checks
+- Placeholder Checks
 - Lighthouse
 - PageSpeed Insights
 - Structured Data Validation
+- Providing Credentials Safely
 - Search Console
 - Social Preview Checks
 - Reporting

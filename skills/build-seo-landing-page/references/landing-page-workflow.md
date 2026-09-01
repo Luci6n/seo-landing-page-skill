@@ -11,6 +11,7 @@ Use this workflow when creating or improving a landing page.
 - 3. Build The Page Structure
 - 4. Add Conversion Paths
 - 5. Add SEO/AEO/GEO Signals
+- 5A. Supporting Pages
 - 6. Verify
 
 ## 1. Understand The Page
