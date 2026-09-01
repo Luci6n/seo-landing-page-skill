@@ -18,7 +18,7 @@ The skill includes:
 
 - `SKILL.md` for trigger metadata and core workflow
 - `agents/openai.yaml` for UI-facing skill metadata
-- `references/` for landing-page, SEO, local SEO, framework, deployment, and validation guidance
+- `references/` for landing-page, SEO, local SEO, framework, deployment, validation, and AI-crawler/`llms.txt` guidance
 - `templates/` for reusable metadata, sitemap, robots, manifest, and JSON-LD starting points
 - `scripts/` for repeatable validation and reporting tasks
 

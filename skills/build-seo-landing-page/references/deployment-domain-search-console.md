@@ -59,6 +59,8 @@ Examples:
 - Update robots sitemap URL.
 - Update structured data URLs.
 - Update Open Graph/Twitter image URLs.
+- Update `llms.txt` links to the new domain.
+- Decide and configure AI-crawler access in `robots.txt` (see `references/ai-crawlers-and-llms-txt.md`).
 - Add Search Console property.
 - Submit sitemap.
 - Add website to Google Business Profile.
@@ -83,3 +85,7 @@ For ordinary pages, the safe flow is:
 1. Submit sitemap.
 2. Inspect URL.
 3. Tell the user if manual URL Inspection / Request Indexing is recommended.
+
+## Generative AI Performance Report
+
+Search Console has a dedicated Generative AI performance report (rolling out from mid-2026) covering impressions across AI Overviews, AI Mode, and AI features in Discover, by page/country/device/date. It has no click, prompt-level, or ranking data, and there is a site-level opt-out toggle for AI features. Only report what this view actually shows; see `references/ai-crawlers-and-llms-txt.md` for detail and honesty limits.

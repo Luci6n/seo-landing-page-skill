@@ -14,7 +14,7 @@ Do not use this skill for tiny copy, style, or component edits unless SEO, conve
 1. Inspect the existing project before editing.
 2. Identify the business/entity, audience, location, services, conversion goal, and deployment target.
 3. Identify the technology stack and preserve its conventions.
-4. Check metadata, headings, structured data, sitemap, robots, favicon, manifest, social previews, and visible business facts.
+4. Check metadata, headings, structured data, sitemap, robots (including AI-crawler access), `llms.txt`, favicon, manifest, social previews, and visible business facts.
 5. Review responsive layout, accessibility, image sizing, JavaScript loading, and CLS risks.
 6. Make concrete file changes using the existing project style.
 7. Run available validation tools or provide exact commands if blocked.
@@ -28,7 +28,9 @@ Do not use this skill for tiny copy, style, or component edits unless SEO, conve
 - For local businesses, prioritize NAP consistency, service areas, opening hours, map/profile links, reviews, and real photos.
 - Treat custom domain, Google Business Profile, reviews, citations, Search Console, and real photos as launch/off-site work, not just code tweaks.
 - After domain or deploy changes, update canonical, sitemap, robots sitemap URL, structured data URLs, social image URLs, and Search Console property.
-- Do not fake ratings, reviews, guarantees, rankings, indexing, Core Web Vitals, Lighthouse/PageSpeed scores, deployment status, or API results.
+- Do not fake ratings, reviews, guarantees, rankings, indexing, Core Web Vitals, Lighthouse/PageSpeed scores, deployment status, AI Overview/AI citation status, or API results.
+- FAQ and HowTo schema no longer produce Google rich results (deprecated May 2026); keep `FAQPage` schema for AI/answer-engine understanding, not for a promised SERP feature.
+- Treat AI-crawler access (`robots.txt` training vs. citation bots) and `llms.txt` as launch-readiness items, and ask the site owner before changing AI-bot access, since it changes real AI-search exposure.
 - Match the design to the page type and audience; prioritize clarity, trust, mobile usability, and conversion over decoration.
 
 ## When To Read References
@@ -42,6 +44,7 @@ Do not use this skill for tiny copy, style, or component edits unless SEO, conve
 - For performance, accessibility, and CLS work, read `references/performance-accessibility.md`.
 - For validation scripts, Lighthouse/PageSpeed, Search Console, and reporting, read `references/validation-workflow.md`.
 - For deployment, domains, Search Console, and Google Business Profile, read `references/deployment-domain-search-console.md`.
+- For `llms.txt`, AI-crawler access, and AI-search reporting, read `references/ai-crawlers-and-llms-txt.md`.
 
 ## Templates
 
@@ -62,6 +65,7 @@ Use templates only as starting points. Adapt them to the project before insertin
 - `templates/static-landing-page.html`
 - `templates/launch-checklist.md`
 - `templates/privacy-notice.md`
+- `templates/llms.txt`
 
 ## Scripts
 
@@ -70,7 +74,7 @@ Scripts are optional helpers. Run them from the target project root when the env
 - `scripts/check-metadata.mjs [html-file] [--no-write]` - static metadata, headings, image, favicon, manifest, and basic SEO checks.
 - `scripts/check-structured-data.mjs [html-file] [--no-write]` - JSON-LD parse and schema sanity checks.
 - `scripts/check-links.mjs [html-file] [--network] [--no-write]` - local links, fragments, assets, and optional external URL checks.
-- `scripts/check-site-files.mjs [site-root] [--no-write]` - `robots.txt`, `sitemap.xml`, `site.webmanifest`, and common icon checks; pass `public` for framework public folders.
+- `scripts/check-site-files.mjs [site-root] [--no-write]` - `robots.txt`, `sitemap.xml`, `site.webmanifest`, `llms.txt`, and common icon checks; pass `public` for framework public folders.
 - `scripts/check-placeholders.mjs [paths...] [--no-write]` - unreplaced `{{PLACEHOLDER}}` checks after templates are applied.
 - `scripts/run-lighthouse.mjs <url> [mobile|desktop]` - Lighthouse JSON report.
 - `scripts/summarize-lighthouse.mjs [lighthouse-json-report] [--no-write]` - Markdown summary from a Lighthouse report.

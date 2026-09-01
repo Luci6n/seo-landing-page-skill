@@ -123,6 +123,8 @@ Good FAQ answers:
 
 Avoid FAQ schema for content that is not written as real questions and answers.
 
+Google removed the FAQ rich result from Search (May 2026) and no longer supports the HowTo rich result. `FAQPage` is still a valid schema.org type and still helps AI assistants and answer engines parse the content, but do not tell a client it will produce a Google Search rich snippet — that feature is gone. See `references/ai-crawlers-and-llms-txt.md` for details.
+
 ## Multilingual Structured Data
 
 When the page supports multiple languages:
