@@ -8,6 +8,7 @@ Use this when a project needs an `llms.txt` file, an AI-crawler access decision 
 - llms-full.txt
 - AI Crawler Access In robots.txt
 - Chinese AI Platforms And Crawlers
+- Notes
 - Google Search Console: Generative AI Performance
 - FAQ And HowTo Rich Results Are Deprecated
 - Honest Expectations
