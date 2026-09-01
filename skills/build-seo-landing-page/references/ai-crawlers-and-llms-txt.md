@@ -88,21 +88,22 @@ Allow: /
 
 Relevant when the business serves China, or a market where Chinese assistants and search engines are used. These do **not** work like the Western four above, so do not assume the same `robots.txt` contract applies.
 
-Chinese search engines publish long-established crawler tokens that generally honor `robots.txt`. If the audience is in China, these matter more than any AI-bot rule:
+**Read this section as a method, not as a token list.** Unlike OpenAI, Anthropic, Google, and Perplexity — each of which publishes a crawler page you can cite — the Chinese platforms have no comparably discoverable first-party documentation, and the bot-directory sites that fill that gap contradict each other. Verify before writing any of these into a client's file.
 
-- `Baiduspider` (Baidu)
-- `Sogou web spider` (Sogou)
-- `360Spider` (360)
-- `YisouSpider` (Shenma)
-- `PetalBot` (Huawei Petal Search)
+Reasonably well established:
 
-`Bytespider` is ByteDance's crawler and feeds its AI products, including the Doubao assistant. It is real, widely seen in logs, and identifies itself. ByteDance states it follows the robots exclusion protocol, but independent reporting has repeatedly documented it fetching disallowed paths — including a first-half-2026 study finding it reached disallowed pages on close to half the sites naming it. Treat `robots.txt` as a statement of intent here and use server/CDN/WAF rules if the block must actually hold.
+- `Baiduspider` is Baidu's crawler; its user-agent string self-identifies with a `baidu.com/search/spider.html` URL, and Baidu runs a webmaster platform (ziyuan.baidu.com) with its own sitemap and indexing tools. Baidu also runs suffixed variants (`-image`, `-video`, `-news`, `-mobile`, `-render`). If the audience is in China, this and Baidu's webmaster tools matter far more than any AI-bot rule.
+- `Bytespider` is ByteDance's crawler, widely seen in real server logs, and feeds ByteDance AI products. ByteDance states it follows the robots exclusion protocol; reporting and third-party crawler research have repeatedly documented it fetching disallowed paths anyway.
+- Other Chinese search crawlers commonly cited include `Sogou web spider`, `360Spider`, `YisouSpider` (Shenma), and `PetalBot` (Huawei). Confirm the exact token against the operator's own webmaster documentation or your own access logs before relying on it — several of these operate multiple named variants.
 
-For **DeepSeek, Qwen, Kimi, and GLM specifically: no first-party crawler user agent is published** that could be verified against vendor documentation. DeepSeek's own repo describes self-collected data "respecting robots.txt", but it publishes no user-agent token, and its fetches have been reported to look like ordinary browser traffic. Third-party bot directories circulate names like `DeepSeekBot`, `QwenBot`, `KimiBot`, and `ChatGLM-Spider`; these are **not vendor-documented**. Do not add them to a client's `robots.txt` and imply they will work — an unrecognized token is an inert line that creates false confidence.
+Not established, and where care is needed:
+
+- For **DeepSeek, Qwen, Kimi, and GLM**, no first-party crawler documentation could be found. Bot-directory sites assert tokens such as `DeepSeekBot`, `QwenBot`, `TongyiBot`, `AliyunBot`, `Qwen-User`, `KimiBot`, and `ChatGLM-Spider`, but these are aggregator claims, they disagree with each other, and none was traceable to a vendor page. DeepSeek's own repository describes collecting data "respecting robots.txt" while publishing no token to target.
+- Treat any such name as unverified. Writing an unrecognized user-agent into `robots.txt` is an inert line that reads like protection and provides none. If a client needs these blocked, confirm the string from your own access logs first.
 
 Two practical consequences:
 
-- For blocking: `robots.txt` is not a reliable lever against these platforms. Server, CDN, or WAF rules are the real control, and identifying the traffic may require rate/behavior analysis rather than a user-agent match.
+- For blocking: `robots.txt` is not a reliable lever across these platforms. Server, CDN, or WAF rules are the real control, and identifying the traffic usually means rate and behavior analysis rather than a user-agent match.
 - For visibility: many Chinese assistants answer using a search backend rather than their own crawler, so being findable in them tracks ordinary indexability in the search engines they ground on — plus crawlable, server-rendered content. There is no allow-rule that buys inclusion.
 
 ## Notes
