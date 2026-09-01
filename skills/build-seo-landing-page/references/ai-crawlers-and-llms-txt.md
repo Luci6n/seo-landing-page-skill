@@ -133,6 +133,9 @@ Search Console has a Generative AI performance report, available worldwide as of
 - Dimensions: pages (final URL after redirects), countries, dates, devices.
 - Not included: clicks, query/prompt text, or ranking position.
 - Subject to the standard Search Console 1,000-row limit; the newest data points can be incomplete (shown as dotted lines) until they finalize.
+- Search Labs experiments are excluded, and Discover has its own separate report.
+
+Google's help page says the report reached all sites worldwide on August 31, 2026, while a troubleshooting note on the same page still says not all properties have access yet. If a property has no report, the likely causes are that stale rollout gap, too few impressions to show, or the site having excluded itself from AI features. Report it as unavailable rather than reporting zero visibility — absent data is not evidence of no impressions.
 
 Controls Google documents for its own AI surfaces (these, not the AI-bot tokens above, are what govern AI Overviews and AI Mode):
 
