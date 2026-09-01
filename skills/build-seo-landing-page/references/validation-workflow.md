@@ -72,11 +72,13 @@ Use support-file checks for static site identity and crawl files:
 node <skill-dir>/scripts/check-site-files.mjs
 ```
 
-This checks `robots.txt`, `sitemap.xml`, `site.webmanifest`, and common icon files. For framework projects before build, pass the public asset directory:
+This checks `robots.txt`, `sitemap.xml`, `site.webmanifest`, `llms.txt`, and common icon files. For framework projects before build, pass the public asset directory:
 
 ```bash
 node <skill-dir>/scripts/check-site-files.mjs public
 ```
+
+Manifest icon note: Chrome's installability check wants a 192x192 and a 512x512 PNG, which is why `templates/site.webmanifest` lists those sizes. Correct icons make the manifest valid and give a good add-to-home-screen icon, but full PWA installability also needs HTTPS and a service worker with a fetch handler. Most landing pages have neither and do not need them — do not tell a client the page is an installable PWA just because the manifest is correct.
 
 ## Placeholder Checks
 

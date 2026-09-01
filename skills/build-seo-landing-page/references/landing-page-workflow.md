@@ -66,6 +66,8 @@ project/
 +-- favicon.ico
 +-- favicon.png
 +-- apple-touch-icon.png
++-- icon-192.png
++-- icon-512.png
 +-- assets/
     +-- images/
     +-- brand/
