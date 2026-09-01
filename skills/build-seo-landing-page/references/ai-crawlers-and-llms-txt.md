@@ -38,7 +38,7 @@ AI crawlers fall into two groups:
 - **Training crawlers** collect content to train future models: `GPTBot`, `ClaudeBot`, `Google-Extended`, `CCBot`.
 - **Retrieval/citation crawlers** fetch content live to answer a specific prompt or power AI-search citations: `OAI-SearchBot`, `ChatGPT-User`, `Claude-SearchBot`, `Claude-User`, `PerplexityBot`, `Perplexity-User`.
 
-Ask the business/site owner which policy they want; this is a real exposure decision, not just a code style choice:
+`templates/robots.txt` ships permissive (`Allow: /` for all agents) with no AI-bot rules baked in — add the block below to the project's actual `robots.txt` only after the site owner picks a policy; this is a real exposure decision, not just a code style choice:
 
 - Allow both groups: maximum AI visibility and possible AI-search citations, but content may also be used for model training.
 - Allow retrieval/citation bots, block training bots: the common 2026 middle path — stay eligible for AI-search citations while opting out of training use.
@@ -86,19 +86,20 @@ Notes:
 
 ## Google Search Console: Generative AI Performance
 
-Search Console added a dedicated Generative AI performance report (rolling out from mid-2026) showing impressions across AI Overviews, AI Mode, and AI features in Discover, broken down by page, country, device, and date. There is also a site-level opt-out toggle to exclude a property from AI features without affecting normal organic ranking.
+Search Console has a Generative AI performance report, available worldwide as of August 31, 2026, covering AI Overviews and AI Mode on Search (a separate version covers Discover). Per Google's own help documentation:
 
-Known limits as of this writing:
+- Metric: impressions only — how often a link to the site was shown in a generative AI feature.
+- Dimensions: pages (final URL after redirects), countries, dates, devices.
+- Not included: clicks, query/prompt text, or ranking position.
+- Subject to the standard Search Console 1,000-row limit; the newest data points can be incomplete (shown as dotted lines) until they finalize.
 
-- No click-through data.
-- No prompt-level query data.
-- No position/ranking data.
+Under Settings > Search generative AI, a site can choose Include / Exclude / Inherit for whether its content is eligible for these AI features. Google states this control does not act as a ranking or inclusion signal for the rest of Search — excluding a site from AI features does not change its normal organic ranking, and included content may still be used to help Google understand queries generally.
 
-When reporting AI-search visibility, only state what the report actually shows (impressions, pages, countries, dates). Do not claim clicks, ranking, or citation frequency that the report does not provide, and do not claim to have checked this report unless it was actually available and viewed.
+When reporting AI-search visibility, only state what the report actually shows (impressions by page/country/device/date). Do not claim clicks, ranking, or citation frequency that the report does not provide, and do not claim to have checked this report unless it was actually available and viewed.
 
 ## FAQ And HowTo Rich Results Are Deprecated
 
-Google removed the FAQ rich result from Search (May 2026) and no longer supports the HowTo rich result. `FAQPage` and `HowTo` remain valid schema.org types, and Google has said it still uses structured data to understand pages, but neither produces a Google Search rich snippet anymore.
+Google stopped showing the HowTo rich result back in 2023. The FAQ rich result stopped appearing starting May 7, 2026, per Google's own structured-data documentation. `FAQPage` and `HowTo` remain valid schema.org types, and Google has said it still uses structured data to understand pages, but neither produces a Google Search rich snippet anymore.
 
 Because of this:
 
@@ -111,5 +112,5 @@ Because of this:
 
 - `llms.txt` adoption is still low (roughly one in ten sites as of early 2026), and independent tracking has not found a measurable citation-rate lift from adding it. Present it as low-cost, forward-looking hygiene — not a guaranteed AI-visibility win.
 - No special schema markup is required for AI Overviews or AI Mode; schema helps trust and understanding, not eligibility by itself.
-- AI systems increasingly cross-check schema claims against live page content, so schema that drifts from what is visible on the page is a liability, not a shortcut.
+- Structured data must match what is visible on the page — see `references/structured-data.md`. Treat this as a standing rule, not a hedge against a specific predicted AI behavior.
 - Do not promise AI Overview inclusion, AI citation, or assistant recommendation as the guaranteed outcome of any single change.
