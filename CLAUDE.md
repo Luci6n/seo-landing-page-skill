@@ -64,7 +64,7 @@ node <path-to-skill>/scripts/inspect-url.mjs <inspection-url> <search-console-si
 
 Notes:
 - Running any script with missing/wrong arguments prints its usage text — that's the intended way to check a script's contract instead of reading source first.
-- `run-pagespeed.mjs` and the Search Console scripts (`list-search-console-sites.mjs`, `submit-sitemap.mjs`, `inspect-url.mjs`) need `PAGESPEED_API_KEY` / `GOOGLE_SEARCH_CONSOLE_ACCESS_TOKEN` respectively. Ask for these only when the requested action actually needs them, use them for the current session only by default, and never write them to `.env`, tracked files, or project config unless explicitly asked.
+- `run-pagespeed.mjs` and the Search Console scripts (`list-search-console-sites.mjs`, `submit-sitemap.mjs`, `inspect-url.mjs`) need `PAGESPEED_API_KEY` / `GOOGLE_SEARCH_CONSOLE_ACCESS_TOKEN` respectively. Ask for these only when the requested action actually needs them, and have the user export the value in their own terminal — never ask them to paste it into chat or type it into a command yourself, since scripts read credentials from environment variables only (no prompt, no `--key` flag) and a pasted/inlined key ends up in the transcript and logs. Never write them to `.env`, tracked files, or project config unless explicitly asked.
 - Scripts must fail honestly (missing credentials/network/quota/deps) rather than fabricate a passing result — this is a hard rule from `CONTRIBUTING.md`, not just a style preference.
 - Reports write to a `reports/` dir under the target project's cwd unless `--no-write` is passed; don't commit generated reports into *this* repo.
 

@@ -77,7 +77,7 @@ If you add or modify a script:
 
 - keep usage text clear
 - fail honestly when credentials, network access, quota, or dependencies are missing
-- ask for secrets only when the requested action needs them, and prefer session-only use by default
+- ask for secrets only when the requested action needs them, and have the user export the value in their own terminal rather than paste it into chat
 - avoid pretending a remote action succeeded
 - keep reports or generated output out of the repo unless they are intentional fixtures
 

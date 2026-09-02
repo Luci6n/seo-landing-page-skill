@@ -89,7 +89,7 @@ Optional API-backed checks may use:
 - `PAGESPEED_API_KEY`
 - `GOOGLE_SEARCH_CONSOLE_ACCESS_TOKEN`
 
-If one of these is needed and missing, the agent should ask only when the requested action requires it and use the secret for the current session only by default.
+If one of these is needed and missing, the agent should ask only when the requested action requires it, and have the user export it in their own terminal rather than paste it into the conversation — a pasted or inlined key ends up in chat history and logs, while an exported variable is inherited by the scripts without ever entering the conversation.
 
 See `SKILL.md` and `CONTRIBUTING.md` for deeper usage and validation details.
 
