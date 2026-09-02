@@ -78,3 +78,11 @@ The specifics worth applying:
 - Keep layouts stable. An agent working from screenshots is thrown by a CTA that moves position between pages or categories — the same discipline as the CLS rules above, for a different reason.
 - Avoid transparent overlays and "ghost" elements over interactive controls. A covered node can be discarded during visual analysis even when it looks transparent.
 - Make sure every action a person needs is actually represented in the interface, not implied by hover or gesture alone.
+
+### WebMCP
+
+WebMCP lets a page register its own JavaScript functions or annotated forms as tools an agent can call directly, instead of the agent inferring actions from the DOM and screenshots. It is a Chrome origin trial, so it is experimental, browser-specific, and subject to change.
+
+It is not relevant to most landing pages, and it is not an SEO/AEO/GEO lever — see `references/seo-aeo-geo-checklist.md`. Consider it only when a site has a genuine multi-step task an agent would complete on the user's behalf: a booking flow, a checkout, a filtered product search. A page whose conversion is a phone call, a WhatsApp message, or a short contact form gains nothing from it, because the agent-readability fundamentals above already make that action reachable.
+
+If a site does qualify, treat it as a progressive enhancement layered on working HTML, never as a replacement for it. Chrome notes the API is designed for local browser workflows with a person in the loop, and that complex interfaces may need refactoring to expose clean state.
