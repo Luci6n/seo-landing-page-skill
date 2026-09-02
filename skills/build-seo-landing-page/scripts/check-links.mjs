@@ -132,7 +132,12 @@ async function checkExternalUrl(target, source) {
 
     return result("fail", target, `HTTP ${response.status}`, source);
   } catch (error) {
-    return result("fail", target, error.message, source);
+    // A timeout, DNS failure, or refused connection means the link could not be
+    // verified from here. That is not the same as the link being broken: the
+    // host may be temporarily down, rate limiting this checker, or blocking its
+    // user agent. Report it as unverified so nobody removes a working link.
+    const reason = error.name === "AbortError" ? "No response within 10s" : error.message;
+    return result("warn", target, `Could not verify - ${reason}. Check manually before changing it.`, source);
   } finally {
     clearTimeout(timeout);
   }
