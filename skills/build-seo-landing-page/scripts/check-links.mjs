@@ -115,7 +115,10 @@ async function checkExternalUrl(target, source) {
       }
     });
 
-    if ([403, 405].includes(response.status)) {
+    // Some endpoints - notably Google Maps embed URLs - reject HEAD outright
+    // with a 404 even though the resource is fine, rather than the more
+    // correct 405. Retry with GET before trusting a non-2xx HEAD response.
+    if ([403, 404, 405].includes(response.status)) {
       response = await fetch(target, {
         method: "GET",
         redirect: "follow",
