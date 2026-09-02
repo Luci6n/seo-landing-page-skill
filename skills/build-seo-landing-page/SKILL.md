@@ -46,6 +46,7 @@ Do not use this skill for tiny copy, style, or component edits unless SEO, conve
 - For validation scripts, Lighthouse/PageSpeed, Search Console, and reporting, read `references/validation-workflow.md`.
 - For deployment, domains, Search Console, and Google Business Profile, read `references/deployment-domain-search-console.md`.
 - For `llms.txt`, AI-crawler access, and AI-search reporting, read `references/ai-crawlers-and-llms-txt.md`.
+- For WebMCP, agent-callable tools, and agent-ready forms, read `references/webmcp.md`.
 
 ## Templates
 
