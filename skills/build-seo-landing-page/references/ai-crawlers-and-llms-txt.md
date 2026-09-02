@@ -7,6 +7,7 @@ Use this when a project needs an `llms.txt` file, an AI-crawler access decision 
 - llms.txt
 - llms-full.txt
 - AI Crawler Access In robots.txt
+- Cloudflare's Managed robots.txt And Content Signals
 - Chinese AI Platforms And Crawlers
 - Verifying A Bot Is Who It Claims
 - Notes
@@ -38,9 +39,11 @@ For a single-page landing site, keep it short: project/business name, a one-line
 
 AI crawlers fall into three groups. Tokens below are as documented by each provider:
 
-- **Training crawlers** collect content that may train future models: `GPTBot` (OpenAI), `ClaudeBot` (Anthropic), `CCBot` (Common Crawl). `Google-Extended` belongs here too, but note its exact scope: it controls use of content for training Gemini models *and* for grounding in Gemini Apps / Vertex AI — it is not a general Google AI switch.
-- **Search/citation crawlers** index content so it can be surfaced and cited in AI search: `OAI-SearchBot` (ChatGPT search), `Claude-SearchBot`, `PerplexityBot`.
-- **User-initiated fetchers** load a page because a person asked a specific question right now: `ChatGPT-User`, `Claude-User`, `Perplexity-User`. Google runs its own set too — `Google-NotebookLM`, `Google-GeminiNotebook`, `Google-CWS`, `Google-Pinpoint`, `Google-Read-Aloud`, `Google-Site-Verifier` — and states plainly that "because the fetch was requested by a user, these fetchers generally ignore robots.txt rules." OpenAI and Perplexity document the same behaviour for theirs. Listing these agents is fine as a statement of intent, but never rely on a `robots.txt` rule to control them.
+- **Training crawlers** collect content that may train future models: `GPTBot` (OpenAI), `ClaudeBot` (Anthropic), `CCBot` (Common Crawl), `Amazonbot` (Amazon — "may be used to train Amazon AI models"), `Applebot-Extended` (Apple — opts out of Apple's foundation-model training while ordinary `Applebot` search crawling continues), `Meta-ExternalAgent` (Meta — "training foundation AI models or improving products by indexing content directly"). `Google-Extended` belongs here too, but note its exact scope: it controls use of content for training Gemini models *and* for grounding in Gemini Apps / Vertex AI — it is not a general Google AI switch.
+- **Search/citation crawlers** index content so it can be surfaced and cited in AI search: `OAI-SearchBot` (ChatGPT search), `Claude-SearchBot`, `PerplexityBot`, `Amzn-SearchBot` (Amazon/Alexa — Amazon states this one "does not crawl content for generative AI model training").
+- **User-initiated fetchers** load a page because a person asked a specific question right now: `ChatGPT-User`, `Claude-User`, `Perplexity-User`, `Amzn-User`, `Meta-ExternalFetcher` (Meta — "may bypass robots.txt rules"). Google runs its own set too — `Google-NotebookLM`, `Google-GeminiNotebook`, `Google-CWS`, `Google-Pinpoint`, `Google-Read-Aloud`, `Google-Site-Verifier` — and states plainly that "because the fetch was requested by a user, these fetchers generally ignore robots.txt rules." OpenAI, Perplexity, and Amazon document the same behaviour for theirs. Listing these agents is fine as a statement of intent, but never rely on a `robots.txt` rule to control them.
+
+Two related tokens that are not AI crawlers at all: `Meta-ExternalAds` crawls for advertising products, not AI training, so grouping it with `Meta-ExternalAgent` is a mistake. `CloudflareBrowserRenderingCrawler`, seen in Cloudflare's managed robots.txt block below, is Cloudflare's own rendering infrastructure, not a third-party AI vendor's bot.
 
 **Google AI Overviews and AI Mode are not governed by any of these tokens.** They are part of Google Search, so they follow normal `Googlebot` access plus the Search generative AI control in Search Console (see below). Google states explicitly that `Google-Extended` does not affect inclusion in Google Search and is not a ranking signal. Blocking `GPTBot`, `ClaudeBot`, `Google-Extended`, or `CCBot` therefore has no effect on AI Overviews eligibility — it affects model training and assistant answers, not Google's own AI surfaces.
 
@@ -65,6 +68,15 @@ Disallow: /
 User-agent: CCBot
 Disallow: /
 
+User-agent: Amazonbot
+Disallow: /
+
+User-agent: Applebot-Extended
+Disallow: /
+
+User-agent: Meta-ExternalAgent
+Disallow: /
+
 User-agent: OAI-SearchBot
 Allow: /
 
@@ -72,6 +84,9 @@ User-agent: Claude-SearchBot
 Allow: /
 
 User-agent: PerplexityBot
+Allow: /
+
+User-agent: Amzn-SearchBot
 Allow: /
 
 # User-initiated agents; these may fetch regardless of robots.txt.
@@ -83,7 +98,25 @@ Allow: /
 
 User-agent: Perplexity-User
 Allow: /
+
+User-agent: Amzn-User
+Allow: /
+
+User-agent: Meta-ExternalFetcher
+Allow: /
 ```
+
+## Cloudflare's Managed robots.txt And Content Signals
+
+Sites behind Cloudflare may have AI-crawler rules that were never written into the project's own files at all. Cloudflare's managed robots.txt is an opt-in zone setting that injects a block of AI-bot rules at the edge — prepended in front of the origin's own `robots.txt` if one exists, or served alone if it does not. `curl`ing a live `/robots.txt` on such a site shows the combined result, not necessarily anything the site's codebase or CMS contains. Editing the origin project's `robots.txt` file will not remove or change this block; that requires the site owner's Cloudflare dashboard (Bots settings). Check for a comment block starting `# BEGIN Cloudflare Managed content` to recognize it.
+
+The injected block also carries a `Content-Signal` directive, Cloudflare's implementation of the IETF AI Preferences (AIPREF) working group's draft standard for machine-readable AI-use preferences, for example:
+
+```
+Content-Signal: search=yes,ai-train=no,use=reference
+```
+
+The defined categories are `search` (search indexing), `ai-input` (real-time use such as grounding or RAG), and `ai-train` (training/fine-tuning); `use` further qualifies how content already permitted may be consumed (`immediate`, `reference`, or `full`). Unlike a plain `Disallow`, this directive is written to double as a formal reservation of rights under Article 4 of the EU Copyright in the Digital Single Market Directive (2019/790) — the legal mechanism for opting out of the EU's text-and-data-mining exception. It is still voluntary as far as crawler compliance goes, exactly like the rest of `robots.txt`, but it carries more legal weight for an EU-facing business than an ordinary comment would. Note this when a client's business operates in or serves the EU.
 
 ## Chinese AI Platforms And Crawlers
 
