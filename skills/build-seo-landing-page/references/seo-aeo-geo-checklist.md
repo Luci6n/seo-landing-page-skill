@@ -67,6 +67,8 @@ Google publishes a mythbusting list for AEO/GEO. These are its words on what doe
 
 Google also warns to "be wary of third-party tools that promise ranking success or claim to use 'internal' Google metrics", since no third-party tool can see its ranking or AI systems. Quote a tool's number as that tool's estimate, never as Google's.
 
+**WebMCP is not an SEO, AEO, or GEO feature.** It lets a page expose its own functions to a browser agent as callable tools, and it is a Chrome origin trial aimed at multi-step task completion — retail checkout, booking, filtered search. Chrome documents that "clients and browsers must visit a site directly to know if it has callable tools", so nothing about it is discoverable at crawl time, and its documentation makes no claim about search, ranking, or indexing. Adding it will not affect visibility or citations. See `references/performance-accessibility.md` for when it is genuinely worth considering.
+
 Do not sell any of the above to a client as an AI-visibility win. The things that do matter are the ordinary ones: crawlable content, useful text, accurate structured data that matches the page, and real business facts.
 
 ## AI Crawlers And llms.txt
