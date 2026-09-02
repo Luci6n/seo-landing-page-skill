@@ -35,12 +35,17 @@ function auditValue(id) {
   return lighthouse.audits?.[id]?.displayValue || "n/a";
 }
 
-const METRIC_LABELS = {
-  LARGEST_CONTENTFUL_PAINT_MS: "LCP",
-  INTERACTION_TO_NEXT_PAINT: "INP",
-  CUMULATIVE_LAYOUT_SHIFT_SCORE: "CLS",
-  FIRST_CONTENTFUL_PAINT_MS: "FCP",
-  EXPERIMENTAL_TIME_TO_FIRST_BYTE: "TTFB"
+// Labels and units per developer.chrome.com/docs/crux/api. Some CrUX field
+// keys carry an "_MS" suffix and some do not (e.g. INTERACTION_TO_NEXT_PAINT,
+// EXPERIMENTAL_TIME_TO_FIRST_BYTE), so the unit is looked up explicitly rather
+// than guessed from the key name. An unrecognized key prints with no unit
+// rather than a guessed one.
+const KNOWN_METRICS = {
+  LARGEST_CONTENTFUL_PAINT_MS: { label: "LCP", unit: " ms" },
+  INTERACTION_TO_NEXT_PAINT: { label: "INP", unit: " ms" },
+  CUMULATIVE_LAYOUT_SHIFT_SCORE: { label: "CLS", unit: "" },
+  FIRST_CONTENTFUL_PAINT_MS: { label: "FCP", unit: " ms" },
+  EXPERIMENTAL_TIME_TO_FIRST_BYTE: { label: "TTFB", unit: " ms" }
 };
 
 // Field data (CrUX) is the real-user measurement Google uses. It is absent for
@@ -49,10 +54,9 @@ function fieldLines(experience, label) {
   if (!experience?.metrics) return [`- ${label}: no field data available (not enough real-user traffic).`];
 
   const entries = Object.entries(experience.metrics).map(([key, metric]) => {
-    const name = METRIC_LABELS[key] || key;
-    // Only label a unit the key itself declares; values are otherwise printed
-    // exactly as the API returned them rather than converted.
-    const unit = key.endsWith("_MS") ? " ms" : "";
+    const known = KNOWN_METRICS[key];
+    const name = known?.label || key;
+    const unit = known?.unit || "";
     const category = metric?.category ? ` (${metric.category})` : "";
     return `  - ${name}: ${metric?.percentile ?? "n/a"}${unit}${category}`;
   });
@@ -90,7 +94,7 @@ const lines = [
   "- Field data above is what Google actually uses for Core Web Vitals. Lab numbers are a simulation of one run.",
   "- Lab runs cannot measure INP, because they never interact with the page. Only the field section can report it.",
   "- No field data means too little real-user traffic yet. It does not mean the page passes.",
-  "- Field values are printed exactly as the API returns them. Check the metric's documented unit before quoting a CLS number to anyone.",
+  "- Units are labelled for LCP, INP, FCP, TTFB, and CLS. Any other metric key prints its raw percentile with no unit; check developer.chrome.com/docs/crux/api before quoting it.",
   "- Treat scores as diagnostic signals, not guarantees."
 ];
 
