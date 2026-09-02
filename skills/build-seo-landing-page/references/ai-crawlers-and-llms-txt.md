@@ -110,7 +110,7 @@ Allow: /
 
 Sites behind Cloudflare may have AI-crawler rules that were never written into the project's own files at all. Cloudflare's managed robots.txt is an opt-in zone setting that injects a block of AI-bot rules at the edge — prepended in front of the origin's own `robots.txt` if one exists, or served alone if it does not. `curl`ing a live `/robots.txt` on such a site shows the combined result, not necessarily anything the site's codebase or CMS contains. Editing the origin project's `robots.txt` file will not remove or change this block; that requires the site owner's Cloudflare dashboard (Bots settings). Check for a comment block starting `# BEGIN Cloudflare Managed content` to recognize it.
 
-The injected block also carries a `Content-Signal` directive, Cloudflare's implementation of the IETF AI Preferences (AIPREF) working group's draft standard for machine-readable AI-use preferences, for example:
+The injected block also carries a `Content-Signal` directive — Cloudflare's own Content Signals Policy format for machine-readable AI-use preferences, not a ratified standard. (The IETF does have an AI Preferences working group, `aipref`, working in this space, but Cloudflare's own documentation does not describe Content-Signal as an implementation of it, so do not present the two as the same thing.) For example:
 
 ```
 Content-Signal: search=yes,ai-train=no,use=reference
@@ -120,9 +120,9 @@ The defined categories are `search` (search indexing), `ai-input` (real-time use
 
 ## Chinese AI Platforms And Crawlers
 
-Relevant when the business serves China, or a market where Chinese assistants and search engines are used. These do **not** work like the Western four above, so do not assume the same `robots.txt` contract applies.
+Relevant when the business serves China, or a market where Chinese assistants and search engines are used. These do **not** work like the vendors above, so do not assume the same `robots.txt` contract applies.
 
-**Read this section as a method, not as a token list.** Unlike OpenAI, Anthropic, Google, and Perplexity — each of which publishes a crawler page you can cite — the Chinese platforms have no comparably discoverable first-party documentation, and the bot-directory sites that fill that gap contradict each other. Verify before writing any of these into a client's file.
+**Read this section as a method, not as a token list.** OpenAI, Anthropic, Google, Perplexity, Amazon, Apple, and Meta each publish a crawler page you can cite. The Chinese platforms have no comparably discoverable first-party documentation, and the bot-directory sites that fill that gap contradict each other. Verify before writing any of these into a client's file.
 
 Reasonably well established:
 
