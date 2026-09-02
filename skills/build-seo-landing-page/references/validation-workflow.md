@@ -109,6 +109,10 @@ npm install -D lighthouse
 
 Do not treat a single Lighthouse run as permanent truth. Re-test after meaningful layout, asset, or script changes.
 
+### Known Windows Failure
+
+On Windows, `run-lighthouse.mjs` can fail with an `EPERM` error deleting a temp Chrome profile directory (`chrome-launcher` `destroyTmp`), even though Chrome and Lighthouse both ran correctly. This is a known upstream bug, not a missing dependency — see [GoogleChrome/chrome-launcher#355](https://github.com/GoogleChrome/chrome-launcher/issues/355). `run-lighthouse.mjs` checks whether a report file actually exists before claiming success or blaming a missing install, and says so plainly when it hits this failure. When it does, use `run-pagespeed.mjs` instead: verified working end to end in this environment, it needs no local Chrome launch, and it returns field data (real-user CrUX metrics) that Lighthouse cannot provide at all.
+
 ## PageSpeed Insights
 
 Use PageSpeed Insights for deployed public URLs:
