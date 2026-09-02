@@ -63,4 +63,18 @@ Risky:
 - Support reduced motion.
 - Ensure mobile menu state uses `aria-expanded`.
 
-Accessibility now has a second audience. Google notes that browser-based AI agents inspect a page by analysing its visual rendering, DOM structure, and **accessibility tree** to complete tasks. Semantic HTML, real button and link elements, labelled form fields, and accurate ARIA state therefore make a page legible to agents for the same reasons they make it usable with a screen reader. This is a reason to do accessibility properly, not a separate "agent optimization" task.
+## Agent Readability
+
+Accessibility now has a second audience. Browser-based AI agents complete tasks on a user's behalf by reading a page three ways at once: a screenshot interpreted by a vision model, the raw DOM, and the **accessibility tree** — which they treat as the page's semantic map because it strips visual noise down to roles, names, and states.
+
+This matters commercially on a landing page: if an agent cannot identify the call to action, it cannot convert. Google's guidance is that everything making a site agent-ready also makes it better for people, so treat this as a reason to do the fundamentals properly rather than as separate "agent optimization".
+
+The specifics worth applying:
+
+- Use real `<button>` and `<a>` elements for actions and navigation. Agents recognise them. Where a `<div>` or `<span>` is unavoidable, give it the right `role` and a `tabindex`.
+- Set `cursor: pointer` on interactive elements; it is a strong actionability signal.
+- Link every label to its input with `for`, so the agent can tell what a field is for.
+- Keep interactive elements visibly larger than about 8 square pixels, or visual analysis may filter them out.
+- Keep layouts stable. An agent working from screenshots is thrown by a CTA that moves position between pages or categories — the same discipline as the CLS rules above, for a different reason.
+- Avoid transparent overlays and "ghost" elements over interactive controls. A covered node can be discarded during visual analysis even when it looks transparent.
+- Make sure every action a person needs is actually represented in the interface, not implied by hover or gesture alone.
