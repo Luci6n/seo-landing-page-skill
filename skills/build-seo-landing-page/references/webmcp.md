@@ -16,7 +16,9 @@ Use this when a project asks about WebMCP, agent-ready pages, or "getting found 
 
 ## What WebMCP Is
 
-WebMCP lets a page register its own capabilities as structured tools that a browser-based AI agent can call directly, instead of the agent inferring actions from screenshots and the DOM. It is a proposed standard from the W3C Web Machine Learning Community Group, authored with Google and Microsoft involvement, currently a Chrome origin trial.
+WebMCP lets a page register its own capabilities as structured tools that a browser-based AI agent can call directly, instead of the agent inferring actions from screenshots and the DOM.
+
+Be precise about its status. It is a Draft Community Group Report published by the W3C Web Machine Learning Community Group, edited by engineers from Microsoft and Google, and it states of itself: "This specification was published by the Web Machine Learning Community Group. **It is not a W3C Standard nor is it on the W3C Standards Track.**" Chrome ships it as an origin trial. Do not describe it to a client as a web standard.
 
 Two ways to define tools:
 
@@ -58,7 +60,9 @@ Always layer it on a working interface. It is a progressive enhancement, never a
 
 ## Declarative API
 
-The realistic entry point for a landing page. Two attributes on a form the site already has:
+The cheapest entry point for a landing page — but also the least settled part of WebMCP, so weigh that before recommending it. The specification's declarative section currently reads "This section is entirely a TODO", so the behaviour lives in Chrome's implementation and explainer rather than in the spec, and ChatGPT's browser does not support it at all. It degrades harmlessly, since the attributes are ignored where unsupported, but treat the attribute names as liable to change.
+
+Two attributes on a form the site already has:
 
 ```html
 <form toolname="requestServiceQuote"
@@ -146,6 +150,6 @@ Because support differs per agent and is changing quickly, verify current behavi
 
 ## Ecosystem
 
-Investment is substantial and worth taking seriously even though the standard is early: OpenAI ran a WebMCP hackathon with Chrome, Cloudflare, Shopify, Vercel, Render, and Netlify, and adjacent agentic-commerce protocols are being pushed by both OpenAI and Google.
+Investment is substantial and worth taking seriously even though the specification is early. In August 2026 OpenAI ran a ten-day WebMCP hackathon with Google Chrome, Cloudflare, Shopify, Vercel, Render, and Netlify, and said support was being added to the ChatGPT desktop app's built-in browser and ChatGPT Sites. Google separately points to emerging agentic-commerce work such as the Universal Commerce Protocol.
 
 Take it seriously as a **capability** bet for sites with real transactional flows. Do not let that momentum get repackaged to a client as a ranking or visibility benefit, because no implementer claims that.
