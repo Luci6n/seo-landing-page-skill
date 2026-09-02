@@ -81,8 +81,8 @@ The specifics worth applying:
 
 ### WebMCP
 
-WebMCP lets a page register its own JavaScript functions or annotated forms as tools an agent can call directly, instead of the agent inferring actions from the DOM and screenshots. It is a Chrome origin trial, so it is experimental, browser-specific, and subject to change.
+The fundamentals above are what make a page usable by an agent. WebMCP goes further: a page can register its forms or JavaScript functions as named tools an agent calls directly, rather than inferring actions from the DOM and screenshots.
 
-It is not relevant to most landing pages, and it is not an SEO/AEO/GEO lever — see `references/seo-aeo-geo-checklist.md`. Consider it only when a site has a genuine multi-step task an agent would complete on the user's behalf: a booking flow, a checkout, a filtered product search. A page whose conversion is a phone call, a WhatsApp message, or a short contact form gains nothing from it, because the agent-readability fundamentals above already make that action reachable.
+It is worth considering when the page has a real task to expose — a booking, quote, enquiry form, or filtered search — and the declarative form-annotation route costs two HTML attributes. It is not worth it for a page whose conversion is a phone call, and it is **not** an SEO/AEO/GEO lever: it changes what an agent can do once it arrives, not whether anyone finds the page.
 
-If a site does qualify, treat it as a progressive enhancement layered on working HTML, never as a replacement for it. Chrome notes the API is designed for local browser workflows with a person in the loop, and that complex interfaces may need refactoring to expose clean state.
+For the APIs, tool-writing guidance, security requirements, and per-agent support differences, read `references/webmcp.md`.
